@@ -39,7 +39,7 @@ const MockupComponent = () => {
         {/* Rectangle Image */}
         <div className="relative w-full">
           <img
-            src="./rectangle.png"
+            src="./Rectangle.png"
             alt="Mockup Rectangle"
             className="hidden sm:block h-[300px] sm:h-[400px] md:h-[500px] 
           lg:h-[610px] object-cover rounded-[8px]"
