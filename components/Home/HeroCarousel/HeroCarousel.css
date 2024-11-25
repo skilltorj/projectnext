@@ -1,0 +1,173 @@
+.p-carousel-prev,
+.p-carousel-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgb(255, 255, 255); /* White background */
+  border: none;
+  width: 30px; /* Adjust size */
+  height: 30px; /* Adjust size */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%; /* Circular shape */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  z-index: 10;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.p-carousel-prev:hover,
+.p-carousel-next:hover {
+  background-color: rgba(255, 255, 255, 0.9); /* Slight transparency on hover */
+}
+
+.p-carousel-prev {
+  left: 110px; 
+}
+
+.p-carousel-next {
+  right: 110px; 
+}
+
+@media only screen and (max-width: 500px) {
+  .p-carousel-prev {
+    left: 38px; 
+    top: 310px;
+  }
+  
+  .p-carousel-next {
+    right: 38px; 
+    top: 310px;
+  }
+}
+
+
+
+.custominput input{
+/* background-color: transparent !important;
+color: white; */
+  width: 85px;
+}
+
+.p-dropdown .p-dropdown-label {
+  padding-left: 0.5rem; /* Align dropdown text with the icon */
+  padding-right: 2.5rem;
+  color: white;
+}
+
+.small-screen-height {
+  height: 76vh; /* Adjust height for small screens */
+}
+
+/* Dots wrapper to align below the carousel */
+.carousel-container {
+  position: relative;
+}
+
+/* Static dots */
+.static-dot {
+  background-color: #9C9BAC;
+  width: 8px !important;
+}
+
+
+.active-dot {
+  background-color: transparent;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Loading animation for active dot */
+.active-dot .animate-dot-loading {
+  width: 0%;
+  height: 100%;
+  background-color: white;
+  animation: dot-loading 4s linear;
+  position: absolute;
+  border-radius: 35px;
+}
+
+/* Animation for dot loading */
+@keyframes dot-loading {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* Responsive fixes for dots on small screens */
+@media (max-width: 767px) {
+  .absolute {
+    bottom: 2%; /* Adjust dot position for small screens */
+  }
+}
+
+
+
+.slideInLeft {
+  -webkit-animation-name: slideInLeft;
+  animation-name: slideInLeft;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  }
+  @-webkit-keyframes slideInLeft {
+  0% {
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+  visibility: visible;
+  }
+  100% {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  }
+  }
+  @keyframes slideInLeft {
+  0% {
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+  visibility: visible;
+  }
+  100% {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  }
+  } 
+
+
+
+
+ .slideInRight {
+  -webkit-animation-name: slideInRight;
+  animation-name: slideInRight;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  }
+  @-webkit-keyframes slideInRight {
+  0% {
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+  visibility: visible;
+  }
+  100% {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  }
+  }
+  @keyframes slideInRight {
+  0% {
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+  visibility: visible;
+  }
+  100% {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  }
+  }
