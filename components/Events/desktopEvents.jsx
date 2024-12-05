@@ -3,8 +3,8 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 const DesktopEvents = ({ eventImages, currentIndex, visibleImages, prevSlide, nextSlide }) => {
   const [eventTitle, setEventTitle] = useState(eventImages[currentIndex].title)
   const [eventContent, setEventContent] = useState(eventImages[currentIndex].description)
-  const [eventDate, setEventDate] = useState(eventImages[currentIndex].date);
-  const [eventTime, setEventTime] = useState(eventImages[currentIndex].time);
+  const [eventDate, setEventDate] = useState(eventImages[currentIndex].from);
+  const [eventTime, setEventTime] = useState(eventImages[currentIndex].to);
   const [locate, setLocate] = useState(eventImages[currentIndex].area_1)
   const location = '/location_img.png';
   // const leftArrow = '/leftArrow.png';
@@ -13,8 +13,8 @@ const DesktopEvents = ({ eventImages, currentIndex, visibleImages, prevSlide, ne
   useEffect(() => {
     setEventTitle(eventImages[currentIndex].title)
     setEventContent(eventImages[currentIndex].description)
-    setEventDate(eventImages[currentIndex].date);
-    setEventTime(eventImages[currentIndex].time);
+    setEventDate(formatDate(eventImages[currentIndex].from)); // Format the date here
+    setEventTime(formatDate(eventImages[currentIndex].to));
     setLocate(eventImages[currentIndex].area_1)
 
     
@@ -24,6 +24,32 @@ const DesktopEvents = ({ eventImages, currentIndex, visibleImages, prevSlide, ne
   useEffect(() => {
 console.log("event date",eventDate)
   },[]);
+
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+  
+    // Get the day with an ordinal suffix (e.g., 1st, 2nd, 3rd)
+    const day = date.getDate();
+    const dayWithSuffix =
+      day +
+      (day % 10 === 1 && day !== 11
+        ? "st"
+        : day % 10 === 2 && day !== 12
+        ? "nd"
+        : day % 10 === 3 && day !== 13
+        ? "rd"
+        : "th");
+  
+    // Get the month abbreviation (e.g., Jan, Feb, Mar)
+    const month = date.toLocaleString("default", { month: "short" });
+  
+    // Get the year
+    const year = date.getFullYear();
+  
+    return `${dayWithSuffix} ${month} ${year}`;
+  };
+  
 
   
   return (
@@ -54,10 +80,10 @@ console.log("event date",eventDate)
             </p>
             <div className="flex justify-between ls:relative ls:top-[60px] xss:relative xss:top-[60px]">
               <div>
-                <p className="inline-block bg-[#DDD3E9] text-[#6338A1] font-bold p-4 ls:text-[16px] rounded-lg ls:w-[140px] xss:w-[100px]" >
+                <p className="inline-block bg-[#DDD3E9] text-[#6338A1] font-bold p-4 ls:text-[14px] rounded-lg ls:w-[148px] xss:w-[100px] ls:text-start" >
                   {eventDate}
                 </p>
-                <p className="inline-block bg-[#DDD3E9] text-[#6338A1] font-bold p-4 ls:text-[16px] rounded-lg ml-4 pl-8 ls:w-[140px] xss:w-[100px] xss:text-left"
+                <p className="inline-block bg-[#DDD3E9] text-[#6338A1] font-bold p-4 ls:text-[14px] rounded-lg ls:w-[154px] xss:w-[100px] ls:text-start ml-4 pl-8"
                   >
                   {eventTime}
                 </p>
