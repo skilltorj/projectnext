@@ -1,35 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
-const DesktopEvents = ({ eventImages, currentIndex, visibleImages, prevSlide, nextSlide }) => {
+const DesktopEvents = ({ eventImages, currentIndex, prevSlide, nextSlide }) => {
   const [eventTitle, setEventTitle] = useState(eventImages[currentIndex].title)
   const [eventContent, setEventContent] = useState(eventImages[currentIndex].description)
   const [eventDate, setEventDate] = useState(eventImages[currentIndex].from);
   const [eventTime, setEventTime] = useState(eventImages[currentIndex].to);
   const [locate, setLocate] = useState(eventImages[currentIndex].area_1)
   const location = '/location_img.png';
-  // const leftArrow = '/leftArrow.png';
-  // const rightArrow = '/rightArrow.png'
-  // Update date and time whenever the currentIndex changes
   useEffect(() => {
     setEventTitle(eventImages[currentIndex].title)
     setEventContent(eventImages[currentIndex].description)
-    setEventDate(formatDate(eventImages[currentIndex].from)); // Format the date here
+    setEventDate(formatDate(eventImages[currentIndex].from));
     setEventTime(formatDate(eventImages[currentIndex].to));
     setLocate(eventImages[currentIndex].area_1)
-
-    
   }, [currentIndex, eventImages]);
-
-
-  useEffect(() => {
-console.log("event date",eventDate)
-  },[]);
-
-
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-  
-    // Get the day with an ordinal suffix (e.g., 1st, 2nd, 3rd)
     const day = date.getDate();
     const dayWithSuffix =
       day +
@@ -40,18 +26,20 @@ console.log("event date",eventDate)
         : day % 10 === 3 && day !== 13
         ? "rd"
         : "th");
-  
-    // Get the month abbreviation (e.g., Jan, Feb, Mar)
     const month = date.toLocaleString("default", { month: "short" });
-  
-    // Get the year
     const year = date.getFullYear();
-  
     return `${dayWithSuffix} ${month} ${year}`;
   };
-  
-
-  
+  const getNextImages = (startIndex, count) => {
+    const result = [];
+    let index = startIndex;
+    for (let i = 0; i < count; i++) {
+      index = (index + 1) % eventImages.length;
+      result.push(eventImages[index]);
+    }
+    return result;
+  };
+  const nextImages = getNextImages(currentIndex, 3);
   return (
     <div className="hidden lg:block mx-[80px]">
       <div className="container mx-auto px-4 md:mt-[20px]">
@@ -64,15 +52,17 @@ console.log("event date",eventDate)
         <div className="border_gray lg:flex overflow-hidden mt-6 p-5 pr-5 w-full mx-0 px-0 rounded-lg xss:p-8 ">
           <img
             src={eventImages[currentIndex].poster}
-            className="rounded-xl w-[356px] h-[248px] md:w-[500px] md:h-[574px] xss:w-[300px] xss:h-[370px] ls:ml-6 ls:w-[450px] ls:h-[490px]"
+            className="rounded-xl w-[356px] h-[248px] md:w-[500px] md:h-[574px] xss:w-[300px] xss:h-[370px] ls:ml-6 ls:w-[450px] ls:h-[490px] object-cover"
             alt="Main Event"
           />
           <div className=" md:w-auto lg:w-auto ls:ml-[30px] xss:p-6 xss:text-[10px] mb-[-50px]">
           <div className="flex justify-between mt-8 md:w-auto xss:mt-[-26px]">
-              <h1 className="font-bold text-3xl xss:text-xl ls:text-2xl xss:text-[14px] xss:mb-[-30px] min-h-[70px]">{eventTitle}</h1>
-              <p className="flex items-center ls:text-sm lg:text-base text-[#6E6E6E] xss:text-[10px] xss:mr-[-40px] whitespace-nowrap">
-                <img src={location} className="mr-2 text-lg xss:h-3 ls:h-5 xss:mr-1" />
-                {locate}
+              <h1 className="font-bold text-3xl xss:text-xl ls:text-2xl xss:text-[14px] xss:mb-[-30px] min-h-[70px]">
+                {eventTitle}
+              </h1>
+              <p className="flex items-center ls:text-sm lg:text-base text-[#6E6E6E] xss:text-[10px] xss:mr-[-40px] whitespace-nowrap w-[150px]">
+                <img src={location} className="mr-2 text-lg xss:h-3 ls:h-5 xss:mr-1 shrink-0" alt="Location icon" />
+                <span className="truncate">{locate}</span>
               </p>
             </div>
             <p className="ls:text-xl text-gray-500 relative top-[40px] line-clamp-2 xss:text-[14px]">
@@ -94,8 +84,8 @@ console.log("event date",eventDate)
                 </button>
               </div>
             </div>
-            <div className="carousel lg:w-1/2 flex items-center xss:mt-[-22px] ls:mt-12">
-              {visibleImages.map((image) => (
+            <div className="carousel lg:w-1/2 flex items-center xss:mt-[-22px] ls:mt-7">
+              {nextImages.map((image) => (
                 <img
                   key={image.id}
                   src={image.poster}
